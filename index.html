@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+
+
+    <div class="container">                                                                                     <!--Container with the Inputs-->                                                                        
+        <label for="spacing">Spacing</label>
+        <input type="range" min=0 max=100 value=0 name="spacing" id="spacing" data-sizing="px">
+        <label for="blur">Blur</label>
+        <input type="range" min=0 max=25 value=0 name="blur" id="blur" data-sizing="px">
+        <label for="base">Base Color</label>
+        <input type="color"  value=#ffc600 name="base" id="base">
+    </div>
+
+    <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+
+    <style>                                                                                                     /*CSS variables and styling*/
+
+        :root
+        {
+            --base:#ffc600;                                                                                     /*Declaring CSS Variables*/
+            --blur:0px;
+            --spacing:0px;
+
+        }
+
+        img
+        {
+
+            padding: var(--spacing);
+            background-color: var(--base);
+            filter: blur(var(--blur));
+            
+
+        }
+
+        input{
+            width: 100px;
+        }
+
+        body 
+        {
+            text-align: center;
+            background: #193549;
+            color: white;
+            font-family: 'helvetica neue', sans-serif;
+            font-weight: 100;
+            font-size: 50px;
+         }
+
+        .container 
+        {
+            margin-bottom: 50px;
+        }
+
+        .hl
+        {
+            color: var(--base);
+        }
+
+    </style>                                                                                                        <!--End OF CSS styling-->
+    
+
+
+    <script>                                                                                                       //Start of Javascript 
+         
+     const inputs=document.querySelectorAll('.container input')                                                 //Selecting inputs
+
+     function setChange()                                                                                          // Function used to change the sizing,color,opacity
+        {
+           const suffix=this.dataset.sizing||'';
+           document.documentElement.style.setProperty(`--${this.name}` ,this.value + suffix);
+
+        }
+
+       
+     inputs.forEach(input=>input.addEventListener('input',setChange))
+
+
+    </script>                                                                                                           <!--End OF JAvascript Code-->
+    
+</body>
+</html>
